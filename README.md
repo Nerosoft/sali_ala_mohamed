@@ -1,5 +1,8 @@
 # sali_ala_mohamed
-تطبيق صلي علي محمد وذكر الله
+## تطبيق صلي علي محمد وذكر الله
+***
+# لتحميل وتجربة التطبيق
+* ## [MediaFire](http://www.mediafire.com/file/gayf5c5chsshqyd/sali_ala_mohamed.apk/file)
 ### الشاشه الرأيسية
 ![login mobe](https://github.com/Nerosoft/sali_ala_mohamed/blob/master/screen%20shot/Screenshot_2018-08-14-15-18-53-28.png)
 ### اختيار الذكر المناسب لك
