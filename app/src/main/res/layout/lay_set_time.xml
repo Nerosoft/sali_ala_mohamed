@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <Button
+        android:text="+"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/buttonP"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/buttonM"
+        android:id="@+id/seekBar5"
+        android:min="1"
+        android:max="60"
+        android:layout_toStartOf="@+id/buttonP"
+        android:layout_toLeftOf="@+id/buttonP"
+        android:layout_toRightOf="@+id/buttonM" />
+
+    <Button
+        android:text="-"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/buttonM"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/textViewtime"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
