@@ -14,13 +14,14 @@
 
 
     <TextView
-        android:text="Copyright \u00a9 Abdo El Gamal All Right Reserved"
+        android:text="2020Copyright \u00a9 Abdo El Gamal All Right Reserved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:textColor="#ffffff"
         android:textSize="13dp"
         android:textAlignment="center"
+        android:onClick="clickTO"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -68,5 +69,14 @@
         android:layout_below="@+id/imageViewButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/support"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/imageView3"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/support"
+        android:onClick="clickTO" />
 
 </RelativeLayout>

@@ -9,33 +9,20 @@ import android.content.Context
 import android.content.Intent
 
 import android.os.Build
-import android.os.PowerManager
 
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat
+
 
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        runPower(context)
+      //  runPower(context)
         var myService = Intent(context, SaliService::class.java)
         // context.startService(myService)
         ContextCompat.startForegroundService(context, myService);
     }
 
 
-    lateinit var pm: PowerManager
-    lateinit var wl: PowerManager.WakeLock
-    fun runPower(context: Context) {
-        this.pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        wl = pm.newWakeLock(
-                PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ON_AFTER_RELEASE, "TAG")
-        //   wl.setReferenceCounted(true)
-        wl.acquire()
-    }
-
-    fun stopPower() {
-        if (wl != null) wl.release()
-    }
 
 
     companion object {

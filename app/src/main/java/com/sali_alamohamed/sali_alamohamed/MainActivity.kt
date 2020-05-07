@@ -1,6 +1,6 @@
 package com.sali_alamohamed.sali_alamohamed
 
-import android.support.v7.app.AppCompatActivity
+
 import android.os.Bundle
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -12,13 +12,8 @@ import android.widget.*
 import android.widget.ArrayAdapter
 import android.content.pm.PackageManager
 import android.content.ComponentName
-import android.app.job.JobScheduler
-import android.app.job.JobInfo
-
-
-
-
-
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,21 +49,21 @@ class MainActivity : AppCompatActivity() {
 //            refreshSetting()
 //        }
 
-        ButImg.setOnClickListener({
+        ButImg.setOnClickListener {
 
             if (ButImg.tag.toString() == "off") {
                 var setTime = dialogTime()
                 setTime.listener = View.OnClickListener {
                     refreshSetting()
                     runAlarm()
-                   // runJop(ButImg)
+                    // runJop(ButImg)
                 }
-                setTime.show(fragmentManager, "")
+                setTime.show(supportFragmentManager, "")
             } else{
                 canselAlert()
-               // cancelJop(ButImg)
+                // cancelJop(ButImg)
             }
-        })
+        }
 
         spinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -137,57 +132,19 @@ class MainActivity : AppCompatActivity() {
         ButImg.tag = "off"
     }
 
-    //---------------------------------------------------
-
-
-    fun runJop(ButImg: ImageView){
-
-
-        // wrap your stuff in a componentName
-        val receiver = ComponentName(this, JopService::class.java)
-         val pm = this.packageManager
-         pm.setComponentEnabledSetting(receiver,
-                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP)
-
-
-    // set up conditions for the job
-        val task = JobInfo.Builder(333, receiver)
-             //   .setPeriodic(1)
-                //.setOverrideDeadline(1)
-                .setPeriodic(9000)
-                .setRequiresDeviceIdle(false)
-                //.setPeriodic((1000 * 60 *time).toLong())
-                .setRequiresCharging(true) // default is "false"
-               // .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY) // Parameter may be "ANY", "NONE" (=default) or "UNMETERED"
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED) // Parameter may be "ANY", "NONE" (=default) or "UNMETERED"
-                .build()
-    // inform the system of the job
-        val jobScheduler = this.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        jobScheduler.schedule(task)
-        ButImg.setImageResource(R.drawable.icon_btn_on)
-        ButImg.tag = "on"
+    fun clickTO(view: View){
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/Sali-ala-mohamed-107350450790911/"))
+        startActivity(browserIntent)
     }
-
-    fun cancelJop(ButImg: ImageView){
-        // Disable a receiver
-        val receiver = ComponentName(this, JopService::class.java)
-        val pm = this.packageManager
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP)
-        val jobScheduler = this.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        jobScheduler.cancelAll()
-        ButImg.setImageResource(R.drawable.ic_icon_btn_off)
-        ButImg.tag = "off"
-        JopService.apk=false
-    }
-//-----------------------------------------
-
     override fun onDestroy() {
         canselAlert()
         super.onDestroy()
 
     }
+
+
+
+
+
 
 }

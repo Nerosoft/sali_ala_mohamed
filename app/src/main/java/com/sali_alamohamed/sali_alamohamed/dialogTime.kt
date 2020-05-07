@@ -2,7 +2,7 @@ package com.sali_alamohamed.sali_alamohamed
 
 import android.app.Dialog
 import android.content.Context
-import android.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.app.AlertDialog
 import android.view.View
 import android.widget.TextView
@@ -12,6 +12,7 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.os.Bundle
 import android.widget.Button
+
 
 
 class dialogTime : DialogFragment() {
@@ -25,13 +26,13 @@ class dialogTime : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         builder = AlertDialog.Builder(activity)
         // Get the layout inflater
-        var inflater: LayoutInflater = activity.layoutInflater
+        var inflater: LayoutInflater = activity!!.layoutInflater
         builder.setTitle("ادخل الوقت المناسب لك للذكر")
         layView = inflater.inflate(R.layout.lay_set_time, null)
 
         builder.setView(layView).setPositiveButton("OK", { dialogInterface: DialogInterface, id: Int ->
 
-            activity.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).edit()
+            activity!!.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).edit()
                     .putInt("SPPROG",
                             if(seekBar.progress==0) 1
                             else seekBar.progress).commit()
@@ -43,10 +44,10 @@ class dialogTime : DialogFragment() {
         textView = layView.findViewById(R.id.textViewtime)
         seekBar = layView.findViewById(R.id.seekBar5)
 
-        if (activity.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("SPPROG", 5) == 5) {
+        if (activity!!.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("SPPROG", 5) == 5) {
             seekBar.progress = 5
         } else
-            seekBar.progress = activity.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("SPPROG", 5)
+            seekBar.progress = activity!!.applicationContext.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("SPPROG", 5)
 
         textView.text = "" + seekBar.progress
 
@@ -67,7 +68,7 @@ class dialogTime : DialogFragment() {
 
         layView.findViewById<Button>(R.id.buttonM).setOnClickListener({
             seekBar.progress -= 1
-            Toast.makeText(activity.applicationContext, "احسنت كلما قل كثر الذكر", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity!!.applicationContext, "احسنت كلما قل كثر الذكر", Toast.LENGTH_SHORT).show();
             testprog()
         })
 
