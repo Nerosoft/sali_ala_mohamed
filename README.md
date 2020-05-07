@@ -1,6 +1,8 @@
 # sali_ala_mohamed
 ## تطبيق صلي علي محمد وذكر الله
 ***
+# اصدار يعمل علي انظمة اندرويد القديمة
+* ## [تحميل](https://github.com/Nerosoft/sali_ala_mohamed/tree/2c13dcf25d64e87cfe730bffc0fc230dd0956073)
 # لتحميل وتجربة التطبيق
 * ## [MediaFire](http://www.mediafire.com/file/gayf5c5chsshqyd/sali_ala_mohamed.apk/file)
 ### الشاشه الرأيسية
