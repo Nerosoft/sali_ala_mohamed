@@ -1,5 +1,8 @@
 # sali_ala_mohamed
 ## تطبيق صلي علي محمد وذكر الله
+# شكرا جزيلا علي دعم التطبيق
+![Youtube](https://github.com/Nerosoft/sali_ala_mohamed/blob/master/screen%20shot/sali%20youtube.PNG)
+* ## [Youtube](https://www.youtube.com/watch?v=CBYYcz1edlM)
 ***
 # اصدار يعمل علي انظمة اندرويد القديمة
 * ## [تحميل](https://github.com/Nerosoft/sali_ala_mohamed/tree/2c13dcf25d64e87cfe730bffc0fc230dd0956073)
