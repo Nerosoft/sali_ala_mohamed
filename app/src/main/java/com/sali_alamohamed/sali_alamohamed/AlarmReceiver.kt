@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 
 import android.os.Build
+import android.util.Log
 
 import androidx.core.content.ContextCompat
 
@@ -32,7 +33,7 @@ class AlarmReceiver : BroadcastReceiver() {
             var recurringAlarm: PendingIntent? = null
             var alarms: AlarmManager
             myAlarm = Intent(context, AlarmReceiver::class.java)
-            //myAlarm.putExtra("project_id", project_id); //Put Extra if needed
+//          myAlarm.putExtra("project_mode", mode); //Put Extra if needed
             recurringAlarm = PendingIntent.getBroadcast(context, 0, myAlarm, PendingIntent.FLAG_UPDATE_CURRENT)
             alarms = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -1,24 +1,24 @@
 <resources>
-    <string name="app_name">Sli Ala Mohamed</string>
+    <string name="app_name">صلي علي محمد</string>
 
     <string-array name="planets_array">
         <item>صلي علي النبي</item>
-        <!--<item>لا حول ولا قوة الا بالله</item>-->
-        <!--<item>اللهم صلي علي محمد</item>-->
-        <!--<item>سبحان الله الحمد لله</item>-->
+        <item>لا حول ولا قوة الا بالله</item>
+        <item>اللهم صلي علي محمد</item>
+        <item>سبحان الله الحمد لله</item>
 
-        <!--<item>استغفر الله</item>-->
-        <!--<item>سبحان الله</item>-->
-        <!--<item>الحمد لله</item>-->
-        <!--<item>لا الاه الا الله</item>-->
-        <!--<item>الله اكبر</item>-->
-        <!--<item>لا حول ولا قوة الا بالله</item>-->
-        <!--<item>اللهم صلي علي محمد</item>-->
-        <!--<item>سبحان الله العظيم</item>-->
-        <!--<item>استغفر الله واتوب اليه</item>-->
-        <!--<item>الحمد لله رب العالمين</item>-->
-        <!--<item>سبحان الله وبحمده</item>-->
-        <!--<item>صلي علي النبي</item>-->
+        <item>استغفر الله</item>
+        <item>سبحان الله</item>
+        <item>الحمد لله</item>
+        <item>لا الاه الا الله</item>
+        <item>الله اكبر</item>
+        <item>لا حول ولا قوة الا بالله</item>
+        <item>اللهم صلي علي محمد</item>
+        <item>سبحان الله العظيم</item>
+        <item>استغفر الله واتوب اليه</item>
+        <item>الحمد لله رب العالمين</item>
+        <item>سبحان الله وبحمده</item>
+        <item>صلي علي النبي</item>
     </string-array>
 
 

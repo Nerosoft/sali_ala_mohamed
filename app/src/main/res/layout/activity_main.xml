@@ -9,12 +9,12 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:background="@drawable/bg"
+    android:background="@drawable/ic_bg"
     tools:context="com.sali_alamohamed.sali_alamohamed.MainActivity">
 
 
     <TextView
-        android:text="2020Copyright \u00a9 Abdo El Gamal All Right Reserved"
+        android:text="2021Copyright \u00a9 Abdo El Gammal All Right Reserved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
@@ -23,7 +23,8 @@
         android:textAlignment="center"
         android:onClick="clickTO"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 
     <ImageView
         android:layout_width="wrap_content"

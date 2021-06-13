@@ -1,19 +1,27 @@
 package com.sali_alamohamed.sali_alamohamed
 
 
-import android.os.Bundle
+import android.app.ActivityManager
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.text.TextUtils.SimpleStringSplitter
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.*
-import android.widget.ArrayAdapter
-import android.content.pm.PackageManager
-import android.content.ComponentName
-import android.net.Uri
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,32 +30,21 @@ class MainActivity : AppCompatActivity() {
     var recurringAlarm: PendingIntent? = null
     lateinit var alarms: AlarmManager
     lateinit var textCount: TextView
-    lateinit var ButImg:ImageView
-    lateinit var spinner:Spinner
+    lateinit var ButImg: ImageView
+    lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ButImg= findViewById(R.id.imageViewButton)
-        textCount=findViewById(R.id.textView2)
-        spinner=findViewById(R.id.spinner)
+        ButImg = findViewById(R.id.imageViewButton)
+        textCount = findViewById(R.id.textView2)
+        spinner = findViewById(R.id.spinner)
         val adapter = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
         refreshSetting()
-
-
-//        var alarmup: Boolean = PendingIntent.getBroadcast(this, 0,
-//                Intent(this, AlarmReceiver::class.java),
-//                PendingIntent.FLAG_NO_CREATE) != null
-//
-//        if (alarmup) {
-//            ButImg.setImageResource(R.drawable.icon_btn_on)
-//            ButImg.tag = "on"
-//            refreshSetting()
-//        }
 
         ButImg.setOnClickListener {
 
@@ -56,16 +53,14 @@ class MainActivity : AppCompatActivity() {
                 setTime.listener = View.OnClickListener {
                     refreshSetting()
                     runAlarm()
-                    // runJop(ButImg)
                 }
                 setTime.show(supportFragmentManager, "")
-            } else{
+            } else {
                 canselAlert()
-                // cancelJop(ButImg)
             }
         }
 
-        spinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -79,11 +74,24 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    fun refreshSetting(){
+    fun refreshSetting() {
         val time = this.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("SPPROG", 5)
-        spinner.setSelection( this.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("mode", 0))
+        spinner.setSelection(this.getSharedPreferences("mySpinner", Context.MODE_PRIVATE).getInt("mode", 0))
         textCount.text = "Every : " + time + " Minute"
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getActiveNotification(101)) {
+                ButImg.setImageResource(R.drawable.icon_btn_on)
+                ButImg.tag = "on"
+            }
+
+        } else
+            if (isMyServiceRunning(SaliService::class.java)) {
+                ButImg.setImageResource(R.drawable.icon_btn_on)
+                ButImg.tag = "on"
+            }
+
     }
 
     override fun onBackPressed() {
@@ -106,8 +114,10 @@ class MainActivity : AppCompatActivity() {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP)
 
-      AlarmReceiver.keepRunning(applicationContext)
+        AlarmReceiver.keepRunning(applicationContext)
 
+        var myService = Intent(applicationContext, SaliService::class.java)
+        ContextCompat.startForegroundService(applicationContext, myService);
 
         ButImg.setImageResource(R.drawable.icon_btn_on)
         ButImg.tag = "on"
@@ -132,19 +142,37 @@ class MainActivity : AppCompatActivity() {
         ButImg.tag = "off"
     }
 
-    fun clickTO(view: View){
+    fun clickTO(view: View) {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/Sali-ala-mohamed-107350450790911/"))
         startActivity(browserIntent)
     }
-    override fun onDestroy() {
-        canselAlert()
-        super.onDestroy()
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    fun getActiveNotification(notificationId: Int): Boolean {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val barNotifications = notificationManager.activeNotifications
+        for (notification in barNotifications) {
+            if (notification.id == notificationId) {
+                return true
+                //return notification.notification
+            }
+        }
+
+        return false
     }
 
-
-
-
-
+    @Suppress("deprecation")
+    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                //   Log.i("isMyServiceRunning?", true.toString() + "")
+                return true
+            }
+        }
+        // Log.i("isMyServiceRunning?", false.toString() + "")
+        return false
+    }
 
 }
